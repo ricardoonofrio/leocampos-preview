@@ -190,29 +190,31 @@
     }
 
     .section {
-      position: relative;
+      position: sticky;
+      top: 0;
       overflow: hidden;
       padding: 80px 0;
       display: flex;
       align-items: center;
+      min-height: 100vh;
+      box-shadow: 0 -20px 40px rgba(0,0,0,0.15); /* Sombra para o efeito de sobreposição */
     }
 
-    .section:not(.section-hero)::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 10%;
-      right: 10%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      opacity: 0.25;
-      pointer-events: none;
-    }
+    /* Definir Z-index progressivo para criar o efeito de pilha */
+    #inicio { z-index: 1; }
+    #para-quem { z-index: 2; }
+    #proposta { z-index: 3; }
+    #escolha { z-index: 4; }
+    #sobre { z-index: 5; }
+    #diferencial { z-index: 6; }
+    #credenciais { z-index: 7; }
+    #consultoria { z-index: 8; }
+    #educacao { z-index: 9; }
+    #faq { z-index: 10; }
+    #contato { z-index: 11; }
 
     .section-hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
+      z-index: 1;
       padding: 96px 0 120px;
     }
 
@@ -821,11 +823,15 @@
       }
 
       .section {
+        position: relative; /* Remove o sticky no mobile para uma rolagem mais leve */
         padding: 80px 0;
+        min-height: auto;
+        box-shadow: none;
       }
 
       .section-hero {
         padding: 120px 0 80px;
+        min-height: auto;
       }
 
       .nav-links {
@@ -1399,6 +1405,8 @@
 
     const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
+        // No modo stacking, a seção entra no topo e permanece. 
+        // Monitoramos quando ela está bem visível para disparar o tema.
         if (entry.isIntersecting) {
           const theme = entry.target.dataset.theme;
           const id = entry.target.id;
@@ -1408,7 +1416,8 @@
         }
       });
     }, {
-      threshold: 0.45
+      rootMargin: '-10% 0px -80% 0px', // Detecta a entrada no topo da tela
+      threshold: 0
     });
 
     sections.forEach(section => sectionObserver.observe(section));
@@ -1444,8 +1453,10 @@
           // Parallax on each section's background layer
           document.querySelectorAll('.section').forEach(section => {
             const rect = section.getBoundingClientRect();
-            const center = rect.top + rect.height / 2;
-            const offset = (window.innerHeight / 2 - center) * 0.12; // 12% speed ratio — very subtle
+            // Se a seção está sticky no topo, rect.top fica próximo de 0.
+            // Usamos a posição relativa ao viewport ou o scroll absoluto.
+            const speed = 0.12;
+            const offset = (window.innerHeight / 2 - (rect.top + rect.height / 2)) * speed;
             const layer = section.querySelector('.parallax-layer');
             if (layer) layer.style.transform = `translateY(${offset}px)`;
           });
