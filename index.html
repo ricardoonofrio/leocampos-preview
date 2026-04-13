@@ -187,7 +187,8 @@
       background: none;
       border: 0;
       color: inherit;
-      font-size: 1.4rem;
+      font-size: 1.8rem;
+      z-index: 2000;
       cursor: pointer;
     }
 
@@ -870,7 +871,7 @@
         padding: 40px;
         gap: 32px;
         transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 1000;
+        z-index: 1500;
         box-shadow: -10px 0 30px rgba(0,0,0,0.5);
       }
 
@@ -1424,11 +1425,15 @@
     const navItems = document.querySelectorAll('.nav-links a');
 
     menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.innerHTML = isOpen ? '✕' : '☰';
     });
 
     navItems.forEach(link => {
-      link.addEventListener('click', () => navLinks.classList.remove('open'));
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.innerHTML = '☰';
+      });
     });
 
     const setActiveNav = (id) => {
