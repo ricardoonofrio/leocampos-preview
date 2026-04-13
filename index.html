@@ -1,0 +1,1459 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leo Campos Finanças</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0A141F;
+      --bg-green: #112C26;
+      --bg-light: #F5F5F5;
+      --gold: #CDB179;
+      --text-dark: #0A141F;
+      --text-soft: #383D43;
+      --text-light: #F5F5F5;
+      --line-light: rgba(10, 20, 31, 0.10);
+      --line-dark: rgba(245, 245, 245, 0.12);
+      --container: 1240px;
+      --content: 1160px;
+      --transition: 0.6s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      transition: background-color 0.8s ease, color 0.8s ease;
+      overflow-x: hidden;
+    }
+
+    body.theme-light {
+      background: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    body.theme-dark {
+      background: var(--bg-dark);
+      color: var(--text-light);
+    }
+
+    body.theme-green {
+      background: var(--bg-green);
+      color: var(--text-light);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(100% - 64px, var(--container));
+      margin: 0 auto;
+    }
+
+    .content-width {
+      width: min(100%, var(--content));
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: transparent;
+      transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .site-header.scrolled {
+      backdrop-filter: blur(18px);
+    }
+
+    .theme-light .site-header.scrolled {
+      background: rgba(245, 245, 245, 0.82);
+      border-color: rgba(10, 20, 31, 0.08);
+    }
+
+    .theme-dark .site-header.scrolled,
+    .theme-green .site-header.scrolled {
+      background: rgba(10, 20, 31, 0.34);
+      border-color: rgba(245, 245, 245, 0.08);
+    }
+
+    .nav {
+      min-height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .brand-mark {
+      font-size: 1.08rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      opacity: 0.72;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      font-size: 0.94rem;
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      position: relative;
+      opacity: 0.82;
+      transition: opacity 0.25s ease, color 0.25s ease;
+      line-height: 1;
+      padding-bottom: 8px;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      color: var(--gold);
+    }
+
+    .nav-links a.active {
+      opacity: 1;
+      color: var(--gold);
+    }
+
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 0;
+      color: inherit;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .section {
+      position: relative;
+      overflow: hidden;
+      padding: 40px 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .section:not(.section-hero)::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    .section-hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 96px 0 120px;
+    }
+
+    .section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 35%, rgba(0,0,0,0.02));
+      opacity: 0.35;
+    }
+
+    .section-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .theme-surface {
+      transition: color 0.8s ease;
+    }
+
+    .theme-light .theme-surface {
+      color: var(--text-dark);
+    }
+
+    .theme-dark .theme-surface,
+    .theme-green .theme-surface {
+      color: var(--text-light);
+    }
+
+    .section-header {
+      max-width: 820px;
+      margin-bottom: 32px;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.06;
+      letter-spacing: -0.045em;
+      font-weight: 800;
+    }
+
+    h1 {
+      font-size: clamp(1.45rem, 3.1vw, 2.8rem);
+      max-width: 780px;
+    }
+
+    h2 {
+      font-size: clamp(2.1rem, 4.4vw, 3.8rem);
+      max-width: 860px;
+      margin-bottom: 22px;
+    }
+
+    h3 {
+      font-size: 1.14rem;
+      margin-bottom: 12px;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      font-size: 1.04rem;
+      max-width: 700px;
+      opacity: 0.88;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 22px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      opacity: 0.72;
+      line-height: 1;
+    }
+
+    .gold {
+      color: var(--gold);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.72fr);
+      gap: 72px;
+      align-items: center;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+    }
+
+    .hero-copy p {
+      margin-top: 22px;
+      max-width: 620px;
+      font-size: 1.04rem;
+      line-height: 1.6;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--bg-dark);
+    }
+
+    .btn-secondary {
+      background: transparent;
+    }
+
+    .theme-light .btn-secondary {
+      border-color: rgba(10,20,31,0.14);
+      color: var(--text-dark);
+    }
+
+    .theme-dark .btn-secondary,
+    .theme-green .btn-secondary {
+      border-color: rgba(245,245,245,0.18);
+      color: var(--text-light);
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .visual-box {
+      width: min(100%, 360px);
+      aspect-ratio: 4 / 5;
+      border-radius: 32px;
+      border: 1px solid rgba(205,177,121,0.24);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      margin-left: auto;
+    }
+
+    .theme-light .visual-box {
+      background: linear-gradient(180deg, rgba(10,20,31,0.03), rgba(17,44,38,0.06));
+    }
+
+    .theme-dark .visual-box,
+    .theme-green .visual-box {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(205,177,121,0.06));
+    }
+
+    .visual-box::before {
+      content: "LC";
+      font-size: clamp(4rem, 8vw, 7rem);
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      color: rgba(205,177,121,0.8);
+      line-height: 1;
+    }
+
+    .visual-note {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      right: 24px;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.55;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 56px;
+      align-items: center;
+    }
+
+    .list {
+      display: grid;
+      gap: 18px;
+      list-style: none;
+      max-width: 560px;
+      padding-top: 6px;
+    }
+
+    .list li {
+      padding-left: 24px;
+      position: relative;
+      font-size: 1rem;
+      opacity: 0.9;
+      line-height: 1.7;
+    }
+
+    .list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px 36px;
+      margin-top: 28px;
+      max-width: 1080px;
+    }
+
+    .card {
+      padding-top: 20px;
+      border-top: 1px solid;
+      transition: border-color 0.8s ease;
+    }
+
+    .theme-light .card {
+      border-color: var(--line-light);
+    }
+
+    .theme-dark .card,
+    .theme-green .card {
+      border-color: var(--line-dark);
+    }
+
+    .card p {
+      max-width: 100%;
+      font-size: 0.99rem;
+      line-height: 1.72;
+    }
+
+    .services {
+      display: grid;
+      gap: 0;
+      margin-top: 4px;
+      max-width: 1080px;
+    }
+
+    .service {
+      padding: 22px 0;
+      border-top: 1px solid;
+      transition: border-color 0.8s ease;
+    }
+
+    .service:last-child {
+      border-bottom: 1px solid;
+    }
+
+    .theme-light .service {
+      border-color: var(--line-light);
+    }
+
+    .theme-dark .service,
+    .theme-green .service {
+      border-color: var(--line-dark);
+    }
+
+    .service-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 20px;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    .service-tag {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .service p {
+      max-width: 880px;
+      line-height: 1.72;
+    }
+
+    .service small {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.93rem;
+      opacity: 0.8;
+      line-height: 1.55;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px 40px;
+      max-width: 1020px;
+      margin-top: 4px;
+    }
+
+    .step {
+      padding-top: 18px;
+      border-top: 1px solid;
+      transition: border-color 0.8s ease;
+    }
+
+    .theme-light .step {
+      border-color: var(--line-light);
+    }
+
+    .theme-dark .step,
+    .theme-green .step {
+      border-color: var(--line-dark);
+    }
+
+    .step p {
+      max-width: 100%;
+      line-height: 1.72;
+    }
+
+    .faq {
+      display: grid;
+      gap: 0;
+      margin-top: 4px;
+      max-width: 1040px;
+    }
+
+    .faq-item {
+      border-top: 1px solid;
+      transition: border-color 0.8s ease;
+    }
+
+    .faq-item:last-child {
+      border-bottom: 1px solid;
+    }
+
+    .theme-light .faq-item {
+      border-color: var(--line-light);
+    }
+
+    .theme-dark .faq-item,
+    .theme-green .faq-item {
+      border-color: var(--line-dark);
+    }
+
+    .faq-btn {
+      width: 100%;
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 18px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      text-align: left;
+      font: inherit;
+      cursor: pointer;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+
+    .faq-answer p {
+      padding: 0 0 18px;
+      max-width: 760px;
+      line-height: 1.62;
+    }
+
+    .cta-wrap {
+      max-width: 860px;
+    }
+
+    .cta-wrap p {
+      max-width: 700px;
+      line-height: 1.72;
+    }
+
+    .contact-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 22px;
+      margin-top: 18px;
+      font-size: 0.94rem;
+      opacity: 0.82;
+      line-height: 1.55;
+    }
+
+    .footer {
+      padding: 16px 0 34px;
+      transition: color 0.8s ease, border-color 0.8s ease;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding-top: 22px;
+      border-top: 1px solid;
+      line-height: 1.5;
+    }
+
+    .theme-light .footer-inner {
+      border-color: var(--line-light);
+    }
+
+    .theme-dark .footer-inner,
+    .theme-green .footer-inner {
+      border-color: var(--line-dark);
+    }
+
+    .footer strong {
+      font-size: 0.98rem;
+    }
+
+    .footer small {
+      opacity: 0.72;
+    }
+
+    .floating-cta {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 40;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--gold);
+      color: var(--bg-dark);
+      font-weight: 800;
+      box-shadow: 0 16px 32px rgba(0,0,0,0.18);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-32px);
+      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(32px);
+      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Staggered children */
+    .reveal-group > * {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal-group.visible > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0s; }
+    .reveal-group.visible > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.08s; }
+    .reveal-group.visible > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.16s; }
+    .reveal-group.visible > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.24s; }
+    .reveal-group.visible > *:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 0.32s; }
+    .reveal-group.visible > *:nth-child(n+6) { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+
+    /* Parallax orbs — decorative background depth layers */
+    .section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 55% at 20% 50%, rgba(205,177,121,0.045) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 80% 40%, rgba(205,177,121,0.03) 0%, transparent 65%);
+      will-change: transform;
+      transition: opacity 0.8s ease;
+    }
+
+    .parallax-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      will-change: transform;
+      background:
+        radial-gradient(ellipse 40% 40% at 30% 40%, rgba(205,177,121,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 30% 50% at 75% 60%, rgba(205,177,121,0.04) 0%, transparent 60%);
+      z-index: 0;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+        gap: 64px;
+      }
+
+      .grid-2 {
+        gap: 56px;
+      }
+    }
+
+    @media (min-width: 921px) {
+      .section#sobre,
+      .section#credenciais,
+      .section#consultoria,
+      .section#educacao,
+      .section#proposta,
+      .section#para-quem,
+      .section#escolha,
+      .section#diferencial,
+      .section#faq,
+      .section#contato {
+        min-height: 100vh;
+      }
+
+      .section#consultoria .section-header,
+      .section#educacao .section-header,
+      .section#faq .section-header,
+      .section#contato .section-header {
+        margin-bottom: 24px;
+      }
+
+      .section#processo .section-header,
+      .section#credenciais .section-header {
+        margin-bottom: 28px;
+      }
+    }
+
+    @media (max-width: 920px) {
+      .container {
+        width: min(100% - 40px, var(--container));
+      }
+
+      .hero-grid,
+      .grid-2,
+      .cards,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid,
+      .grid-2 {
+        gap: 44px;
+      }
+
+      .hero-visual {
+        justify-content: flex-start;
+      }
+
+      .visual-box {
+        margin-left: 0;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 84px;
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        gap: 20px;
+      }
+
+      .theme-light .nav-links {
+        background: rgba(245,245,245,0.96);
+        border-bottom: 1px solid rgba(10,20,31,0.08);
+      }
+
+      .theme-dark .nav-links,
+      .theme-green .nav-links {
+        background: rgba(10,20,31,0.96);
+        border-bottom: 1px solid rgba(245,245,245,0.08);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .section {
+        padding: 112px 0 84px;
+        min-height: auto;
+      }
+
+      .section-hero {
+        min-height: auto;
+        padding: 120px 0 84px;
+      }
+
+      .section-header {
+        margin-bottom: 40px;
+      }
+
+      .cards {
+        gap: 28px;
+      }
+
+      .steps {
+        gap: 28px;
+      }
+
+      .service-top {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 28px, var(--container));
+      }
+
+      .nav {
+        min-height: 76px;
+      }
+
+      .section {
+        padding: 96px 0 70px;
+      }
+
+      .section-hero {
+        padding: 106px 0 70px;
+      }
+
+      h1 {
+        font-size: clamp(2.4rem, 12vw, 4rem);
+      }
+
+      h2 {
+        margin-bottom: 18px;
+      }
+
+      .hero-copy p,
+      p {
+        font-size: 1rem;
+      }
+
+      .btn-row {
+        gap: 12px;
+        margin-top: 34px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .visual-box {
+        width: 100%;
+        max-width: 350px;
+      }
+
+      .faq-btn {
+        padding: 20px 0;
+      }
+    }
+  
+    .boxed-cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 32px;
+      max-width: 100%;
+    }
+
+    .boxed-card {
+      padding: 32px 24px;
+      border: 1px solid var(--line-dark);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.02);
+      transition: transform 0.4s ease, border-color 0.4s ease, background 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .theme-light .boxed-card {
+      border-color: var(--line-light);
+      background: rgba(10, 20, 31, 0.02);
+    }
+    
+    .boxed-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--gold);
+      background: rgba(205, 177, 121, 0.04);
+    }
+
+    .boxed-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0;
+      color: var(--gold);
+    }
+
+    .boxed-card p {
+      font-size: 0.94rem;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 1080px) {
+      .boxed-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .boxed-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+  </style>
+</head>
+<body class="theme-light">
+  <header class="site-header" id="siteHeader">
+    <div class="container nav theme-surface">
+      <a href="#inicio" class="brand">
+        <span class="brand-mark">Leo Campos</span>
+        <span class="brand-sub">Finanças e investimentos</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#inicio">Início</a>
+        <a href="#para-quem">Para Quem</a>
+        <a href="#proposta">Proposta</a>
+        <a href="#escolha">Benefícios</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#diferencial">Diferencial</a>
+        <a href="#credenciais">Credenciais</a>
+        <a href="#consultoria">Consultoria</a>
+        <a href="#educacao">Educação</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
+    </div>
+  </header>
+
+  <main>
+<section class="section section-hero" id="inicio" data-theme="dark">
+      <div class="container section-inner theme-surface hero-grid content-width">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">Consultor de Valores Mobiliários</span>
+          <h1>Organize sua vida financeira, invista com <span class="gold">clareza</span> e construa um futuro <span class="gold">seguro e intencional</span>.</h1>
+          <p>
+            Seu dinheiro precisa trabalhar a favor da sua vida, dos seus objetivos e daquilo que realmente importa. Com estratégia, direção e acompanhamento certo, é possível viver bem o presente e planejar um futuro melhor.
+          </p>
+          <div class="btn-row">
+            <a href="#contato" class="btn btn-primary">Agendar uma conversa</a>
+            <a href="#consultoria" class="btn btn-secondary">Conhecer a consultoria</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="visual-box">
+            <img src="foto_leo_campos.jpeg" alt="Leo Campos" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; z-index: 10;" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <section class="section" id="para-quem" data-theme="light">
+      <div class="container section-inner theme-surface content-width">
+        <div class="section-header reveal">
+          <span class="eyebrow">Para quem é</span>
+          <h2>Mais <span class="gold">clareza, controle e direção</span> para suas finanças.</h2>
+          <p>
+            Os serviços são indicados para profissionais liberais, servidores públicos, casais, famílias, ou pessoas em transição de fase de vida que desejam sair da desorganização e tomar decisões com mais segurança. 
+          </p>
+        </div>
+        <div class="boxed-cards" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+          <div class="boxed-card reveal">
+            <h3 style="font-size: 1.25rem;">Organização</h3>
+            <p>Para quem ganha dinheiro, mas não consegue avançar, sente falta de sair da desorganização ou quer parar de apenas "apagar incêndios".</p>
+          </div>
+          <div class="boxed-card reveal" style="transition-delay: 100ms;">
+            <h3 style="font-size: 1.25rem;">Investimentos com Direção</h3>
+            <p>Para quem quer começar a investir da forma certa, ou já investe, mas sente falta de método e estratégia clara.</p>
+          </div>
+          <div class="boxed-card reveal" style="transition-delay: 200ms;">
+            <h3 style="font-size: 1.25rem;">Planejamento Realista</h3>
+            <p>Para quem possui objetivos importantes e quer uma estratégia para equilibrar o presente e o futuro, sem improvisos.</p>
+          </div>
+          <div class="boxed-card reveal" style="transition-delay: 300ms;">
+            <h3 style="font-size: 1.25rem;">Acompanhamento</h3>
+            <p>Para quem busca construir patrimônio com consciência, consistência e acompanhamento de longo prazo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section" id="proposta" data-theme="green">
+      <div class="container section-inner theme-surface content-width">
+        <div class="grid-2">
+          <div class="reveal">
+            <div class="section-header" style="margin-bottom:0;">
+              <span class="eyebrow">Proposta de Valor</span>
+              <h2>Planejamento financeiro com visão <span class="gold">humana, estratégica e personalizada</span>.</h2>
+              <p>
+                Cada pessoa vive uma realidade diferente. Cada família possui desafios, prioridades, sonhos, riscos e possibilidades próprias. Por isso, meu trabalho não é entregar soluções genéricas ou fórmulas prontas.
+                <br><br>
+                O foco é construir com você um plano financeiro que faça sentido para sua fase de vida, sua estrutura familiar, sua capacidade atual e seus objetivos futuros.
+              </p>
+            </div>
+          </div>
+          <div class="reveal" style="padding-top: 12px;">
+            <h3 style="margin-bottom: 24px;">O que você encontra aqui:</h3>
+            <ul style="list-style: none; margin-left: 0;">
+              <li style="margin-bottom: 12px; padding-left: 28px; position: relative;"><span style="position: absolute; left: 0; color: var(--gold); font-size: 1.2rem;">✦</span> Clareza sobre sua realidade financeira.</li>
+              <li style="margin-bottom: 12px; padding-left: 28px; position: relative;"><span style="position: absolute; left: 0; color: var(--gold); font-size: 1.2rem;">✦</span> Organização com método.</li>
+              <li style="margin-bottom: 12px; padding-left: 28px; position: relative;"><span style="position: absolute; left: 0; color: var(--gold); font-size: 1.2rem;">✦</span> Direcionamento para decisões importantes.</li>
+              <li style="margin-bottom: 12px; padding-left: 28px; position: relative;"><span style="position: absolute; left: 0; color: var(--gold); font-size: 1.2rem;">✦</span> Planejamento conectado aos seus projetos de vida.</li>
+              <li style="margin-bottom: 12px; padding-left: 28px; position: relative;"><span style="position: absolute; left: 0; color: var(--gold); font-size: 1.2rem;">✦</span> Orientação de investimentos com coerência, perfil e propósito.</li>
+              <li style="margin-bottom: 12px; padding-left: 28px; position: relative;"><span style="position: absolute; left: 0; color: var(--gold); font-size: 1.2rem;">✦</span> Acompanhamento para transformar intenção em prática.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section" id="escolha" data-theme="light">
+      <div class="container section-inner theme-surface content-width">
+        <div class="grid-2">
+          <div class="reveal">
+            <div class="section-header" style="margin-bottom:0;">
+              <span class="eyebrow">A Transformação</span>
+              <h2>O que este trabalho pode gerar na sua <span class="gold">vida</span>.</h2>
+              <p>
+                Trilharemos um caminho para que você possa entender melhor seu momento financeiro, desenvolvendo uma relação muito mais madura, saudável e estratégica com os seus recursos.
+              </p>
+            </div>
+          </div>
+          <div class="reveal" style="padding-top: 12px;">
+            <ul style="list-style: none; margin-left: 0;">
+              <li style="margin-bottom: 16px; padding-left: 24px; border-left: 2px solid var(--gold);">Mais clareza sobre sua realidade financeira.</li>
+              <li style="margin-bottom: 16px; padding-left: 24px; border-left: 2px solid var(--gold);">Controle de forma prática e menos ansiedade diante das contas.</li>
+              <li style="margin-bottom: 16px; padding-left: 24px; border-left: 2px solid var(--gold);">Decisões de investimento mais conscientes e seguras.</li>
+              <li style="margin-bottom: 16px; padding-left: 24px; border-left: 2px solid var(--gold);">Equilíbrio entre curtir o presente e garantir o futuro.</li>
+              <li style="margin-bottom: 0px; padding-left: 24px; border-left: 2px solid var(--gold);">Um plano realista e palpável para alcançar seus objetivos.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<section class="section" id="sobre" data-theme="dark">
+      <div class="container section-inner theme-surface content-width">
+        <div class="grid-2">
+          <div class="reveal">
+            <div class="section-header" style="margin-bottom:0;">
+              <span class="eyebrow">Sobre o trabalho</span>
+              <h2>Transformar a relação com o dinheiro também transforma a <span class="gold">vida</span>.</h2>
+              <p>
+                Meu nome é Leo Campos e minha missão é ajudar pessoas a desenvolverem uma vida financeira mais organizada, consciente e alinhada com seus objetivos. 
+              </p>
+            </div>
+          </div>
+          <div class="reveal" style="padding-top: 12px;">
+            <p style="margin-bottom: 24px; opacity: 0.88; font-size: 1.04rem;">
+              Ao longo da minha trajetória no mercado financeiro, percebi que o problema muitas vezes está na ausência de direção, de método e de um plano claro. Por isso, meu trabalho vai além de falar sobre números. Eu ajudo meus clientes a enxergarem sua realidade com clareza, tomarem decisões inteligentes e construírem um caminho financeiro possível, equilibrado e sustentável.
+            </p>
+            <div style="padding-left: 20px; border-left: 3px solid var(--gold);">
+              <p style="font-weight: 500; font-size: 1.1rem; font-style: italic; opacity: 0.95;">
+                "Porque finanças bem organizadas não servem apenas para acumular patrimônio. Servem para trazer paz, segurança, liberdade e intenção para a vida."
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <section class="section" id="diferencial" data-theme="light">
+      <div class="container section-inner theme-surface content-width">
+        <div class="grid-2">
+          <div class="reveal">
+            <div class="section-header" style="margin-bottom:0;">
+              <span class="eyebrow">Diferencial Humano</span>
+              <h2>Ajudar você a viver com mais <span class="gold">direção</span>.</h2>
+              <p>
+                Eu acredito que a vida financeira precisa servir à vida como um todo. Por isso, meu trabalho não se resume a planilhas ou conceitos técnicos. Ele passa por entender quem você é, onde está e qual é o caminho que faz sentido para sua realidade.
+              </p>
+            </div>
+          </div>
+          <div class="reveal" style="padding-top: 12px;">
+            <p style="margin-bottom: 24px; opacity: 0.88; font-size: 1.04rem;">
+              Mais do que falar sobre onde você deve colocar o seu dinheiro, estou aqui para entender o que o dinheiro significa para as suas escolhas de vida.<br><br>Um trabalho focado em <strong>orientação profissional, visão humana e construção estratégica.</strong>
+            </p>
+            <div style="padding-left: 20px; border-left: 3px solid var(--gold);">
+              <p style="font-weight: 500; font-size: 1.1rem; font-style: italic; opacity: 0.95;">
+                "Minha maior prioridade não é vender produtos de investimento, mas ensinar e estruturar o plano certo para que você durma tranquilo e veja seu propósito se realizando."
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<section class="section" id="credenciais" data-theme="green">
+      <div class="container section-inner theme-surface content-width">
+        <div class="section-header reveal">
+          <span class="eyebrow">Credenciais</span>
+          <h2>Experiência, base técnica e uma visão <span class="gold">prática</span> para conduzir decisões importantes.</h2>
+          <p>
+            Leo Campos reúne formação, certificações e experiência de mercado para orientar pessoas e famílias em decisões financeiras com mais segurança e consciência.
+          </p>
+        </div>
+
+        <div class="boxed-cards">
+          <div class="boxed-card reveal">
+            <h3>Especialista em Investimentos</h3>
+            <p>Certificação ANBIMA aplicada ao planejamento do cliente.</p>
+          </div>
+          <div class="boxed-card reveal" style="transition-delay: 100ms;">
+            <h3>Consultor de Valores<br>Mobiliários</h3>
+            <p>Autorizado pela CVM, atuação com foco em transparência e seriedade.</p>
+          </div>
+          <div class="boxed-card reveal" style="transition-delay: 200ms;">
+            <h3>+14 anos de<br>Experiência</h3>
+            <p>No mercado financeiro, provendo orientações sólidas.</p>
+          </div>
+          <div class="boxed-card reveal" style="transition-delay: 300ms;">
+            <h3>MBA em Finanças e Planejamento</h3>
+            <p>Administrador de empresas, com MBAs voltados a finanças.</p>
+          </div>
+        </div>
+        <p class="reveal" style="margin-top: 32px; font-weight: 500; font-size: 1.05rem;">Essa base técnica é colocada a serviço de algo muito prático: ajudar você a sair da desorganização, estruturar prioridades e construir uma estratégia financeira coerente com sua realidade e seus objetivos.</p>
+      </div>
+    </section>
+
+    
+    
+<section class="section" id="consultoria" data-theme="light">
+      <div class="container section-inner theme-surface content-width">
+        <div class="section-header reveal">
+          <span class="eyebrow">Consultoria</span>
+          <h2>Cada fase da vida financeira pede um tipo de <span class="gold">direcionamento</span>.</h2>
+          <p>
+            Processos desenhados para atender desde quem precisa de uma leitura clara da situação atual
+            até quem deseja acompanhamento, reorganização e planejamento com visão de futuro.
+          </p>
+        </div>
+
+        <div class="boxed-cards" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+          <div class="boxed-card reveal">
+            <h3>Diagnóstico das<br>Finanças Pessoais</h3>
+            <p>Análise clara da sua situação financeira atual. Ponto de partida ideal para identificar desorganizações, desperdícios e prioridades de ajuste.</p>
+            <p style="margin-top: auto; font-size: 0.85rem; padding-top: 16px; border-top: 1px solid rgba(10,20,31,0.08); color: var(--gold); font-weight: 600; text-transform: uppercase;">Porta de entrada</p>
+          </div>
+
+          <div class="boxed-card reveal" style="transition-delay: 100ms;">
+            <h3>Acompanhamento<br>Financeiro — 12 meses</h3>
+            <p>Processo completo para diagnosticar, reorganizar e amadurecer decisões de orçamento, dívidas e patrimônio com suporte contínuo ao longo do ano.</p>
+            <p style="margin-top: auto; font-size: 0.85rem; padding-top: 16px; border-top: 1px solid rgba(10,20,31,0.08); color: var(--gold); font-weight: 600; text-transform: uppercase;">Processo contínuo</p>
+          </div>
+
+          <div class="boxed-card reveal" style="transition-delay: 200ms;">
+            <h3>Planejamento dos Projetos de Vida e Investimentos</h3>
+            <p>Conexão entre a vida financeira e projetos concretos. O foco é alinhar totalmente os investimentos com seus objetivos, prazos, perfil e risco.</p>
+            <p style="margin-top: auto; font-size: 0.85rem; padding-top: 16px; border-top: 1px solid rgba(10,20,31,0.08); color: var(--gold); font-weight: 600; text-transform: uppercase;">Visão de futuro</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+<section class="section" id="educacao" data-theme="dark">
+      <div class="container section-inner theme-surface content-width">
+        <div class="section-header reveal">
+          <span class="eyebrow">Educação e Informação</span>
+          <h2>Aprender e refletir é o primeiro passo para <span class="gold">avançar</span>.</h2>
+          <p>
+            Educação financeira humana e aplicável à vida real. Tenha acesso a conteúdos transformadores e eventos que conectam dinheiro, propósito e bem-estar.
+          </p>
+        </div>
+
+        <div class="boxed-cards" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+          <div class="boxed-card reveal">
+            <h3>Palestras e Workshops</h3>
+            <p>Conteúdo feito sob medida para empresas, escolas, igrejas e eventos. O objetivo é provocar reflexão e promover uma profunda transformação na cultura das instituições e de seus participantes.</p>
+            <p style="margin-top: auto; font-size: 0.95rem; padding-top: 16px; border-top: 1px solid rgba(245,245,245,0.08); font-weight: 600;">
+              <a href="[inserir]" class="gold" style="text-decoration: underline; transition: opacity 0.3s;" onmouseover="this.style.opacity=0.7" onmouseout="this.style.opacity=1">Levar para o meu Evento</a>
+            </p>
+          </div>
+
+          <div class="boxed-card reveal" style="transition-delay: 100ms;">
+            <h3>Conteúdos Grátis</h3>
+            <p>Acompanhe minha rotina, metodologias e análises diárias nas minhas plataformas públicas. Receba orientações diretas, dicas valiosas e materiais totalmente abertos e fundamentados para evoluir 1% ao dia.</p>
+            <p style="margin-top: auto; font-size: 0.95rem; padding-top: 16px; border-top: 1px solid rgba(245,245,245,0.08); font-weight: 600;">
+              Siga no <a href="https://www.instagram.com/leocamposfin?igsh=bTVzc2g4bmMwNHF6" target="_blank" rel="noopener" class="gold" style="text-decoration: underline; transition: opacity 0.3s;" onmouseover="this.style.opacity=0.7" onmouseout="this.style.opacity=1">Instagram</a> e <a href="https://www.youtube.com/@leocamposfin" target="_blank" rel="noopener" class="gold" style="text-decoration: underline; transition: opacity 0.3s;" onmouseover="this.style.opacity=0.7" onmouseout="this.style.opacity=1">YouTube</a>
+            </p>
+          </div>
+
+          <div class="boxed-card reveal" style="transition-delay: 200ms;">
+            <h3>Cursos de Formação: Método Pleno</h3>
+            <p>Programas de ensino fechados para quem deseja mergulhar na matemática financeira usando um método prático e guiado passo a passo. Aprenda a investir, administrar dívidas e planejar patrimônio do zero absoluto.</p>
+            <p style="margin-top: auto; font-size: 0.95rem; padding-top: 16px; border-top: 1px solid rgba(245,245,245,0.08); font-weight: 600;">
+              <a href="[inserir]" class="gold" style="text-decoration: underline; transition: opacity 0.3s;" onmouseover="this.style.opacity=0.7" onmouseout="this.style.opacity=1">Entrar na Lista de Espera</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+<section class="section" id="faq" data-theme="light">
+      <div class="container section-inner theme-surface content-width">
+        <div class="section-header reveal">
+          <span class="eyebrow">Perguntas frequentes</span>
+          <h2>Dúvidas comuns antes do primeiro <span class="gold">contato</span>.</h2>
+        </div>
+
+        <div class="faq">
+          <div class="faq-item reveal">
+            <button class="faq-btn">
+              <span>Esse trabalho é para quem está endividado ou também para quem já investe?</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Ele pode ajudar tanto quem está desorganizado financeiramente quanto quem já investe, mas sente falta de estratégia, clareza e alinhamento entre dinheiro, objetivos e patrimônio.</p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-btn">
+              <span>Como saber qual serviço é o mais indicado para mim?</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Na conversa inicial, seu momento é entendido com mais profundidade. A partir disso, é indicado o formato mais coerente com a sua realidade e sua necessidade atual.</p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-btn">
+              <span>O atendimento é personalizado?</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Sim. A proposta não é aplicar soluções genéricas, mas construir um direcionamento financeiro compatível com sua fase de vida, estrutura familiar e objetivos.</p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-btn">
+              <span>Os atendimentos podem ser online?</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Sim. A página já foi estruturada para funcionar muito bem com atendimento online e personalizado, podendo depois ser ajustada para formatos presenciais ou híbridos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+<section class="section" id="contato" data-theme="green">
+      <div class="container section-inner theme-surface content-width">
+        <div class="cta-wrap reveal">
+          <div class="section-header" style="margin-bottom:0;">
+            <span class="eyebrow">Próximo passo</span>
+            <h2>Sua vida financeira não precisa continuar no <span class="gold">improviso</span>.</h2>
+            <p>
+              Com orientação profissional, é possível organizar o presente, reduzir erros e construir um futuro
+              mais sólido, equilibrado e intencional. O próximo passo pode começar com uma conversa.
+            </p>
+          </div>
+          <div class="btn-row">
+            <a href="#" class="btn btn-primary">Agendar uma conversa</a>
+            <a href="#" class="btn btn-secondary">Falar no WhatsApp</a>
+          </div>
+          <div class="contact-line">
+            <span>WhatsApp: [inserir]</span>
+            <span>E-mail: [inserir]</span>
+            <a href="https://www.instagram.com/leocamposfin?igsh=bTVzc2g4bmMwNHF6" target="_blank" rel="noopener">Instagram: @leocamposfin</a>
+            <a href="https://www.linkedin.com/in/leocamposfin/" target="_blank" rel="noopener">LinkedIn: leocamposfin</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+</main>
+
+  <footer class="footer theme-surface">
+    <div class="container footer-inner content-width">
+      <strong>Leo Campos • Planejamento Financeiro Pessoal e Familiar</strong>
+      <small>Atendimento personalizado • Online e sob consulta</small>
+    </div>
+  </footer>
+
+  <a class="floating-cta" href="#contato" aria-label="Ir para contato">✦</a>
+
+  <script>
+    const body = document.body;
+    const sections = document.querySelectorAll('.section');
+    const reveals = document.querySelectorAll('.reveal');
+    const header = document.getElementById('siteHeader');
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const navItems = document.querySelectorAll('.nav-links a');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    navItems.forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    const setActiveNav = (id) => {
+      navItems.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+      });
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const theme = entry.target.dataset.theme;
+          const id = entry.target.id;
+          body.classList.remove('theme-light', 'theme-dark', 'theme-green');
+          body.classList.add(`theme-${theme}`);
+          setActiveNav(id);
+        }
+      });
+    }, {
+      threshold: 0.45
+    });
+
+    sections.forEach(section => sectionObserver.observe(section));
+    setActiveNav('inicio');
+
+    const revealAll = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-group');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.10
+    });
+
+    revealAll.forEach(item => revealObserver.observe(item));
+
+    // ── Parallax Engine ──────────────────────────────────────────────────────
+    // Inject a parallax layer div into every section
+    document.querySelectorAll('.section').forEach(section => {
+      const layer = document.createElement('div');
+      layer.classList.add('parallax-layer');
+      section.prepend(layer);
+    });
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+
+          // Parallax on each section's background layer
+          document.querySelectorAll('.section').forEach(section => {
+            const rect = section.getBoundingClientRect();
+            const center = rect.top + rect.height / 2;
+            const offset = (window.innerHeight / 2 - center) * 0.12; // 12% speed ratio — very subtle
+            const layer = section.querySelector('.parallax-layer');
+            if (layer) layer.style.transform = `translateY(${offset}px)`;
+          });
+
+          // Header scroll class
+          if (scrollY > 10) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
+          }
+
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    document.querySelectorAll('.faq-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const answer = button.nextElementSibling;
+        const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+
+        document.querySelectorAll('.faq-answer').forEach(item => {
+          item.style.maxHeight = null;
+        });
+
+        if (!isOpen) {
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
