@@ -84,7 +84,7 @@
       top: 0;
       left: 0;
       right: 0;
-      z-index: 50;
+      z-index: 100;
       background: transparent;
       transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
       border-bottom: 1px solid transparent;
@@ -197,7 +197,21 @@
       display: flex;
       align-items: center;
       min-height: 100vh;
-      box-shadow: 0 -20px 40px rgba(0,0,0,0.15); /* Sombra para o efeito de sobreposição */
+      box-shadow: 0 -30px 60px rgba(0,0,0,0.2); /* Sombra mais profunda para realismo */
+    }
+
+    /* Linhas Divisórias - Restauradas e Ajustadas para o Stacking */
+    .section:not(.section-hero)::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 20; /* Garante que a linha apareça no topo do 'cartão' */
     }
 
     /* Definir Z-index progressivo para criar o efeito de pilha */
@@ -1405,8 +1419,7 @@
 
     const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        // No modo stacking, a seção entra no topo e permanece. 
-        // Monitoramos quando ela está bem visível para disparar o tema.
+        // Disparar a troca logo que o topo da seção encostar no topo do viewport
         if (entry.isIntersecting) {
           const theme = entry.target.dataset.theme;
           const id = entry.target.id;
@@ -1416,7 +1429,7 @@
         }
       });
     }, {
-      rootMargin: '-10% 0px -80% 0px', // Detecta a entrada no topo da tela
+      rootMargin: '-5% 0px -95% 0px', // Gatilho preciso no topo da tela
       threshold: 0
     });
 
