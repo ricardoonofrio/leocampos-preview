@@ -7,7 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     :root {
       --bg-dark: #070D14; /* Azul profundo */
@@ -640,48 +639,39 @@
       line-height: 1.72;
     }
 
-    .social-icons {
+    .contact-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 16px 32px;
       margin-top: 32px;
     }
 
-    .social-icon {
-      display: inline-flex;
+    .contact-link {
+      display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 0 20px;
-      height: 48px;
-      border-radius: 100px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      gap: 10px;
       color: var(--text-light);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       font-weight: 500;
-      white-space: nowrap;
+      transition: all 0.3s ease;
+      opacity: 0.85;
     }
 
-    .theme-light .social-icon {
-      background: rgba(10, 20, 31, 0.03);
-      border-color: rgba(10, 20, 31, 0.08);
+    .theme-light .contact-link {
       color: var(--text-dark);
     }
 
-    .social-icon:hover {
-      transform: translateY(-3px);
-      background: var(--gold-soft);
-      border-color: var(--gold);
+    .contact-link:hover {
+      opacity: 1;
       color: var(--gold);
-      box-shadow: 0 8px 16px -8px rgba(212, 175, 55, 0.3);
+      transform: translateX(4px);
     }
 
-    .social-icon i {
-      width: 18px;
-      height: 18px;
-      opacity: 0.9;
+    .contact-link svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 1.5px;
     }
 
     .footer {
@@ -1388,25 +1378,25 @@
             <a href="#" class="btn btn-primary">Agendar uma conversa</a>
             <a href="#" class="btn btn-secondary">Falar no WhatsApp</a>
           </div>
-          <div class="social-icons">
-            <a href="#" class="social-icon" aria-label="WhatsApp">
-              <i data-lucide="message-circle"></i>
-              <span>WhatsApp</span>
+          <div class="contact-links">
+            <a href="#" class="contact-link" aria-label="WhatsApp">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l2.27-2.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>WhatsApp: [inserir]</span>
             </a>
-            <a href="mailto:contato@leocamposfin.com.br" class="social-icon" aria-label="E-mail">
-              <i data-lucide="mail"></i>
+            <a href="mailto:contato@leocamposfin.com.br" class="contact-link" aria-label="E-mail">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               <span>contato@leocamposfin.com.br</span>
             </a>
-            <a href="https://www.instagram.com/leocamposfin?igsh=bTVzc2g4bmMwNHF6" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
-              <i data-lucide="instagram"></i>
+            <a href="https://www.instagram.com/leocamposfin?igsh=bTVzc2g4bmMwNHF6" target="_blank" rel="noopener" class="contact-link" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
               <span>@leocamposfin</span>
             </a>
-            <a href="https://www.linkedin.com/in/leocamposfin/" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
-              <i data-lucide="linkedin"></i>
+            <a href="https://www.linkedin.com/in/leocamposfin/" target="_blank" rel="noopener" class="contact-link" aria-label="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
               <span>leocamposfin</span>
             </a>
-            <a href="https://www.youtube.com/@leocamposfin" target="_blank" rel="noopener" class="social-icon" aria-label="YouTube">
-              <i data-lucide="youtube"></i>
+            <a href="https://www.youtube.com/@leocamposfin" target="_blank" rel="noopener" class="contact-link" aria-label="YouTube">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.14 1 12 1 12s0 3.86.42 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.86 23 12 23 12s0-3.86-.42-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
               <span>@leocamposfin</span>
             </a>
           </div>
@@ -1528,9 +1518,6 @@
         }
       });
     });
-
-    // Initialize Lucide Icons
-    lucide.createIcons();
   </script>
 </body>
 </html>
