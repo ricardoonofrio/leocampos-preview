@@ -643,21 +643,25 @@
     .social-icons {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 12px;
       margin-top: 32px;
     }
 
     .social-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
+      gap: 12px;
+      padding: 0 20px;
+      height: 48px;
+      border-radius: 100px;
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.08);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      white-space: nowrap;
     }
 
     .theme-light .social-icon {
@@ -667,16 +671,17 @@
     }
 
     .social-icon:hover {
-      transform: translateY(-5px);
+      transform: translateY(-3px);
       background: var(--gold-soft);
       border-color: var(--gold);
       color: var(--gold);
-      box-shadow: 0 10px 20px -10px rgba(212, 175, 55, 0.3);
+      box-shadow: 0 8px 16px -8px rgba(212, 175, 55, 0.3);
     }
 
     .social-icon i {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
+      opacity: 0.9;
     }
 
     .footer {
@@ -1384,20 +1389,25 @@
             <a href="#" class="btn btn-secondary">Falar no WhatsApp</a>
           </div>
           <div class="social-icons">
-            <a href="#" class="social-icon" aria-label="WhatsApp" title="Fale no WhatsApp">
+            <a href="#" class="social-icon" aria-label="WhatsApp">
               <i data-lucide="message-circle"></i>
+              <span>WhatsApp</span>
             </a>
-            <a href="mailto:contato@leocamposfin.com.br" class="social-icon" aria-label="E-mail" title="Envie um e-mail">
+            <a href="mailto:contato@leocamposfin.com.br" class="social-icon" aria-label="E-mail">
               <i data-lucide="mail"></i>
+              <span>contato@leocamposfin.com.br</span>
             </a>
-            <a href="https://www.instagram.com/leocamposfin?igsh=bTVzc2g4bmMwNHF6" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram" title="Siga no Instagram">
+            <a href="https://www.instagram.com/leocamposfin?igsh=bTVzc2g4bmMwNHF6" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
               <i data-lucide="instagram"></i>
+              <span>@leocamposfin</span>
             </a>
-            <a href="https://www.linkedin.com/in/leocamposfin/" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn" title="Conecte-se no LinkedIn">
+            <a href="https://www.linkedin.com/in/leocamposfin/" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
               <i data-lucide="linkedin"></i>
+              <span>leocamposfin</span>
             </a>
-            <a href="https://www.youtube.com/@leocamposfin" target="_blank" rel="noopener" class="social-icon" aria-label="YouTube" title="Assista no YouTube">
+            <a href="https://www.youtube.com/@leocamposfin" target="_blank" rel="noopener" class="social-icon" aria-label="YouTube">
               <i data-lucide="youtube"></i>
+              <span>@leocamposfin</span>
             </a>
           </div>
         </div>
