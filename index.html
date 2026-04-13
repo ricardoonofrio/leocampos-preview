@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     :root {
       --bg-dark: #070D14; /* Azul profundo */
@@ -84,7 +85,7 @@
       top: 0;
       left: 0;
       right: 0;
-      z-index: 100;
+      z-index: 50;
       background: transparent;
       transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
       border-bottom: 1px solid transparent;
@@ -190,17 +191,13 @@
     }
 
     .section {
-      position: sticky;
-      top: 0;
+      position: relative;
       overflow: hidden;
       padding: 80px 0;
       display: flex;
       align-items: center;
-      min-height: 100vh;
-      box-shadow: 0 -30px 60px rgba(0,0,0,0.2); /* Sombra mais profunda para realismo */
     }
 
-    /* Linhas Divisórias - Restauradas e Ajustadas para o Stacking */
     .section:not(.section-hero)::after {
       content: "";
       position: absolute;
@@ -209,26 +206,14 @@
       right: 10%;
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      opacity: 0.35;
+      opacity: 0.25;
       pointer-events: none;
-      z-index: 20; /* Garante que a linha apareça no topo do 'cartão' */
     }
 
-    /* Definir Z-index progressivo para criar o efeito de pilha */
-    #inicio { z-index: 1; }
-    #para-quem { z-index: 2; }
-    #proposta { z-index: 3; }
-    #escolha { z-index: 4; }
-    #sobre { z-index: 5; }
-    #diferencial { z-index: 6; }
-    #credenciais { z-index: 7; }
-    #consultoria { z-index: 8; }
-    #educacao { z-index: 9; }
-    #faq { z-index: 10; }
-    #contato { z-index: 11; }
-
     .section-hero {
-      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
       padding: 96px 0 120px;
     }
 
@@ -655,14 +640,43 @@
       line-height: 1.72;
     }
 
-    .contact-line {
+    .social-icons {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px 22px;
-      margin-top: 18px;
-      font-size: 0.94rem;
-      opacity: 0.82;
-      line-height: 1.55;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .social-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      color: var(--text-light);
+    }
+
+    .theme-light .social-icon {
+      background: rgba(10, 20, 31, 0.03);
+      border-color: rgba(10, 20, 31, 0.08);
+      color: var(--text-dark);
+    }
+
+    .social-icon:hover {
+      transform: translateY(-5px);
+      background: var(--gold-soft);
+      border-color: var(--gold);
+      color: var(--gold);
+      box-shadow: 0 10px 20px -10px rgba(212, 175, 55, 0.3);
+    }
+
+    .social-icon i {
+      width: 20px;
+      height: 20px;
     }
 
     .footer {
@@ -837,15 +851,11 @@
       }
 
       .section {
-        position: relative; /* Remove o sticky no mobile para uma rolagem mais leve */
         padding: 80px 0;
-        min-height: auto;
-        box-shadow: none;
       }
 
       .section-hero {
         padding: 120px 0 80px;
-        min-height: auto;
       }
 
       .nav-links {
@@ -1373,11 +1383,22 @@
             <a href="#" class="btn btn-primary">Agendar uma conversa</a>
             <a href="#" class="btn btn-secondary">Falar no WhatsApp</a>
           </div>
-          <div class="contact-line">
-            <span>WhatsApp: [inserir]</span>
-            <span>E-mail: [inserir]</span>
-            <a href="https://www.instagram.com/leocamposfin?igsh=bTVzc2g4bmMwNHF6" target="_blank" rel="noopener">Instagram: @leocamposfin</a>
-            <a href="https://www.linkedin.com/in/leocamposfin/" target="_blank" rel="noopener">LinkedIn: leocamposfin</a>
+          <div class="social-icons">
+            <a href="#" class="social-icon" aria-label="WhatsApp" title="Fale no WhatsApp">
+              <i data-lucide="message-circle"></i>
+            </a>
+            <a href="mailto:contato@leocamposfin.com.br" class="social-icon" aria-label="E-mail" title="Envie um e-mail">
+              <i data-lucide="mail"></i>
+            </a>
+            <a href="https://www.instagram.com/leocamposfin?igsh=bTVzc2g4bmMwNHF6" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram" title="Siga no Instagram">
+              <i data-lucide="instagram"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/leocamposfin/" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn" title="Conecte-se no LinkedIn">
+              <i data-lucide="linkedin"></i>
+            </a>
+            <a href="https://www.youtube.com/@leocamposfin" target="_blank" rel="noopener" class="social-icon" aria-label="YouTube" title="Assista no YouTube">
+              <i data-lucide="youtube"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -1419,7 +1440,6 @@
 
     const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        // Disparar a troca logo que o topo da seção encostar no topo do viewport
         if (entry.isIntersecting) {
           const theme = entry.target.dataset.theme;
           const id = entry.target.id;
@@ -1429,8 +1449,7 @@
         }
       });
     }, {
-      rootMargin: '-5% 0px -95% 0px', // Gatilho preciso no topo da tela
-      threshold: 0
+      threshold: 0.45
     });
 
     sections.forEach(section => sectionObserver.observe(section));
@@ -1466,10 +1485,8 @@
           // Parallax on each section's background layer
           document.querySelectorAll('.section').forEach(section => {
             const rect = section.getBoundingClientRect();
-            // Se a seção está sticky no topo, rect.top fica próximo de 0.
-            // Usamos a posição relativa ao viewport ou o scroll absoluto.
-            const speed = 0.12;
-            const offset = (window.innerHeight / 2 - (rect.top + rect.height / 2)) * speed;
+            const center = rect.top + rect.height / 2;
+            const offset = (window.innerHeight / 2 - center) * 0.12; // 12% speed ratio — very subtle
             const layer = section.querySelector('.parallax-layer');
             if (layer) layer.style.transform = `translateY(${offset}px)`;
           });
@@ -1501,6 +1518,9 @@
         }
       });
     });
+
+    // Initialize Lucide Icons
+    lucide.createIcons();
   </script>
 </body>
 </html>
