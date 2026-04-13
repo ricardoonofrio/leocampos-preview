@@ -9,15 +9,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #070D14; /* Azul marinho ainda mais profundo */
-      --bg-green: #0C1E1A; /* Verde escuro mais denso */
-      --bg-light: #FAFAFA; /* Off-white mais limpo */
-      --gold: #D4AF37; /* Dourado mais metálico/clássico */
+      --bg-dark: #070D14; /* Azul profundo */
+      --bg-green: #0C1E1A; /* Verde denso */
+      --bg-light: #1B1E23; /* Novo Cinza Escuro (antigo light) para reduzir fadiga visual */
+      --gold: #D4AF37;
       --gold-soft: rgba(212, 175, 55, 0.15);
-      --text-dark: #070D14;
-      --text-soft: #4A4A4A;
-      --text-light: #F0F0F0;
-      --line-light: rgba(7, 13, 20, 0.08);
+      --text-dark: #F5F5F5; /* Invertido para legibilidade no novo fundo escuro */
+      --text-soft: #A0A0A0; /* Ajustado para fundo escuro */
+      --text-light: #F5F5F5;
+      --line-light: rgba(245, 245, 245, 0.1); /* Ajustado para fundo escuro */
       --line-dark: rgba(240, 240, 240, 0.1);
       --glass-dark: rgba(7, 13, 20, 0.45);
       --glass-light: rgba(250, 250, 250, 0.85);
@@ -96,9 +96,9 @@
     }
 
     .theme-light .site-header.scrolled {
-      background: rgba(250, 250, 250, 0.72);
-      border-color: rgba(7, 13, 20, 0.05);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+      background: rgba(27, 30, 35, 0.85); /* Correspondendo ao novo bg-light */
+      border-color: rgba(245, 245, 245, 0.05);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
     }
 
     .theme-dark .site-header.scrolled,
@@ -847,7 +847,7 @@
       }
 
       .theme-light .nav-links {
-        background: rgba(250, 250, 250, 0.98);
+        background: rgba(27, 30, 35, 0.98); /* Ajustado para o novo bg-light escurecido */
       }
 
       .nav-links.open {
@@ -945,8 +945,8 @@
 
     .theme-light .boxed-card {
       border-color: var(--line-light);
-      background: rgba(7, 13, 20, 0.02);
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.02);
+      background: rgba(245, 245, 245, 0.03);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
     }
     
     .boxed-card:hover {
