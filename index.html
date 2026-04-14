@@ -1028,6 +1028,39 @@
       }
     }
 
+    .micro-card {
+      padding: 24px;
+      border: 1px solid rgba(245, 245, 245, 0.08);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.02);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    
+    .micro-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .micro-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+      background: rgba(212, 175, 55, 0.03);
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.2);
+    }
+    
+    .micro-card:hover::before {
+      opacity: 1;
+    }
+
   </style>
 </head>
 <body class="theme-light">
@@ -1083,7 +1116,7 @@
       <div class="container section-inner theme-surface content-width">
         <div class="section-header reveal">
           <span class="eyebrow">Para quem é</span>
-          <h2>Para quem quer parar de apenas reagir e começar a conduzir a própria <span class="gold">vida financeira</span>.</h2>
+          <h2 style="max-width: none; text-wrap: auto;">Para quem quer parar de apenas reagir e começar a conduzir a própria <span class="gold">vida financeira</span>.</h2>
           <p>
             Uma abordagem pensada para quem precisa de direção prática, decisões mais conscientes e um caminho mais claro entre o presente e os objetivos que deseja construir.
           </p>
@@ -1172,7 +1205,7 @@
           <div class="reveal">
             <div class="section-header" style="margin-bottom: 32px;">
               <span class="eyebrow" style="margin-bottom: 16px;">Sobre o Leo Campos</span>
-              <h2 style="font-size: clamp(2rem, 3.5vw, 2.6rem); margin-bottom: 0;">Uma visão mais <span class="gold">humana</span>, estratégica e responsável sobre dinheiro, escolhas e futuro.</h2>
+              <h2 style="font-size: clamp(2rem, 3.5vw, 2.6rem); margin-bottom: 0; max-width: none; text-wrap: auto;">Uma visão mais <span class="gold">humana</span>, estratégica e responsável sobre dinheiro, escolhas e futuro.</h2>
             </div>
             
             <div style="padding: 40px; border: 1px solid rgba(245, 245, 245, 0.08); border-radius: 24px; background: rgba(255, 255, 255, 0.02); display: flex; flex-direction: column; gap: 24px;">
@@ -1189,26 +1222,26 @@
           <div class="reveal" style="transition-delay: 150ms; margin-top: clamp(32px, 8vw, 96px);">
             <div class="section-header" style="margin-bottom: 32px;">
               <span class="eyebrow" style="margin-bottom: 16px;">Credenciais</span>
-              <h2 style="font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 0;">Base técnica sólida a serviço de decisões mais <span class="gold">conscientes</span>.</h2>
+              <h2 style="font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 0; max-width: none; text-wrap: auto;">Base técnica sólida a serviço de decisões mais <span class="gold">conscientes</span>.</h2>
             </div>
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 32px;">
-              <div style="padding: 24px; border: 1px solid rgba(245, 245, 245, 0.08); border-radius: 20px; background: rgba(255, 255, 255, 0.02); display: flex; flex-direction: column;">
+              <div class="micro-card">
                 <span class="gold" style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;">Experiência</span>
                 <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 8px;">+14 anos</h3>
                 <p style="font-size: 0.9rem; opacity: 0.8; margin: 0; line-height: 1.4;">No mercado financeiro</p>
               </div>
-              <div style="padding: 24px; border: 1px solid rgba(245, 245, 245, 0.08); border-radius: 20px; background: rgba(255, 255, 255, 0.02); display: flex; flex-direction: column;">
+              <div class="micro-card">
                 <span class="gold" style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;">CVM</span>
                 <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 8px;">Consultor</h3>
                 <p style="font-size: 0.9rem; opacity: 0.8; margin: 0; line-height: 1.4;">De valores mobiliários</p>
               </div>
-              <div style="padding: 24px; border: 1px solid rgba(245, 245, 245, 0.08); border-radius: 20px; background: rgba(255, 255, 255, 0.02); display: flex; flex-direction: column;">
+              <div class="micro-card">
                 <span class="gold" style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;">ANBIMA</span>
                 <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 8px;">Especialista</h3>
                 <p style="font-size: 0.9rem; opacity: 0.8; margin: 0; line-height: 1.4;">Em investimentos</p>
               </div>
-              <div style="padding: 24px; border: 1px solid rgba(245, 245, 245, 0.08); border-radius: 20px; background: rgba(255, 255, 255, 0.02); display: flex; flex-direction: column;">
+              <div class="micro-card">
                 <span class="gold" style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;">Formação</span>
                 <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 8px;">MBA duplo</h3>
                 <p style="font-size: 0.9rem; opacity: 0.8; margin: 0; line-height: 1.4;">Finanças e planejamento pessoal e familiar</p>
