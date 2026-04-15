@@ -45,7 +45,7 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       line-height: 1.6;
-      transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1), color 1.2s ease;
+      transition: background-color 1.0s cubic-bezier(0.45, 0, 0.55, 1), color 1.0s ease;
       overflow-x: hidden;
       letter-spacing: -0.01em;
     }
@@ -84,9 +84,9 @@
       top: 0;
       left: 0;
       right: 0;
-      z-index: 50;
+      z-index: 1000;
       background: transparent;
-      transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+      transition: all 1.0s cubic-bezier(0.45, 0, 0.55, 1);
       border-bottom: 1px solid transparent;
     }
 
@@ -187,10 +187,30 @@
       background: none;
       border: 0;
       color: inherit;
-      font-size: 1.8rem;
+      width: 48px;
+      height: 48px;
+      position: relative;
       z-index: 2000;
       cursor: pointer;
     }
+
+    .menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: currentColor;
+      position: absolute;
+      left: 12px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .menu-toggle span:nth-child(1) { top: 16px; }
+    .menu-toggle span:nth-child(2) { top: 23px; }
+    .menu-toggle span:nth-child(3) { top: 30px; }
+
+    .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     .section {
       position: relative;
@@ -198,7 +218,7 @@
       padding: 80px 0;
       display: flex;
       align-items: center;
-      scroll-margin-top: 32px;
+      scroll-margin-top: 84px;
     }
 
     .section:not(.section-hero)::after {
@@ -812,14 +832,12 @@
     }
 
     @media (min-width: 921px) {
+      .section#inicio,
       .section#sobre,
-      .section#credenciais,
+      .section#para-quem,
       .section#consultoria,
       .section#educacao,
-      .section#proposta,
-      .section#para-quem,
-      .section#escolha,
-      .section#diferencial,
+      .section#diferenciais,
       .section#faq,
       .section#contato {
         min-height: 100vh;
@@ -851,12 +869,19 @@
         gap: 40px;
       }
 
-      .section {
-        padding: 80px 0;
-      }
-
-      .section-hero {
-        padding: 120px 0 80px;
+      /* Premium section immersion on mobile */
+      .section#inicio,
+      .section#para-quem,
+      .section#sobre,
+      .section#consultoria,
+      .section#educacao,
+      .section#diferenciais,
+      .section#faq,
+      .section#contato {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 96px 0;
       }
 
       .nav-links {
@@ -865,46 +890,44 @@
         right: -100%;
         bottom: 0;
         width: 100%;
-        max-width: 320px;
-        background: #1B1E23;
+        max-width: 300px;
+        background: var(--bg-dark);
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         padding: 40px;
-        gap: 32px;
-        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        gap: 28px;
+        transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 1500;
-        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        box-shadow: -10px 0 40px rgba(0,0,0,0.4);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
       }
 
-      .theme-light .nav-links {
-        background: #1B1E23;
-      }
-
-      /* Fix: Remove backdrop-filter on scrolled header for mobile to avoid stacking context issues */
-      .site-header.scrolled {
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        background: #070D14 !important;
-      }
-
-      .theme-light .site-header.scrolled {
-        background: #1B1E23 !important;
-      }
+      /* Mobile menu theme syncing */
+      .theme-light .nav-links { background: rgba(35, 39, 46, 0.98); }
+      .theme-dark .nav-links { background: rgba(7, 13, 20, 0.98); }
+      .theme-green .nav-links { background: rgba(12, 30, 26, 0.98); }
 
       .nav-links.open {
         right: 0;
-        display: flex;
-        visibility: visible;
-        opacity: 1;
       }
 
       .menu-toggle {
         display: inline-flex;
-        position: relative;
-        z-index: 2100;
       }
+
+      /* Restore premium glassmorphism on mobile header with smooth theme sync */
+      .site-header.scrolled {
+        backdrop-filter: blur(18px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+        transition: background-color 1.0s cubic-bezier(0.45, 0, 0.55, 1);
+      }
+
+      .theme-light .site-header.scrolled { background: rgba(35, 39, 46, 0.8) !important; }
+      .theme-dark .site-header.scrolled { background: rgba(7, 13, 20, 0.8) !important; }
+      .theme-green .site-header.scrolled { background: rgba(12, 30, 26, 0.8) !important; }
     }
 
     @media (max-width: 640px) {
@@ -1069,7 +1092,7 @@
 
   </style>
 </head>
-<body class="theme-light">
+<body class="theme-dark">
   <header class="site-header" id="siteHeader">
     <div class="container nav theme-surface">
       <a href="#inicio" class="brand">
@@ -1086,7 +1109,11 @@
         <a href="#faq">FAQ</a>
         <a href="#contato">Contato</a>
       </nav>
-      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
 
@@ -1411,7 +1438,7 @@
     </section>
 
     
-<section class="section" id="contato" data-theme="light" style="min-height: calc(100vh - 84px); scroll-margin-top: 84px;">
+<section class="section" id="contato" data-theme="light">
       <div class="container section-inner theme-surface content-width">
         <div class="cta-wrap reveal">
           <div class="section-header" style="margin-bottom:0;">
@@ -1450,7 +1477,7 @@
   
 </main>
 
-  <footer class="footer theme-surface">
+  <footer class="footer theme-surface" id="siteFooter" data-theme="dark">
     <div class="container footer-inner content-width">
       <strong>Leo Campos • Planejamento Financeiro Pessoal e Familiar</strong>
       <small>Atendimento personalizado • Online e sob consulta</small>
@@ -1474,7 +1501,7 @@
 
     menuToggle.addEventListener('click', () => {
       const isOpen = navLinks.classList.toggle('open');
-      menuToggle.innerHTML = isOpen ? '✕' : '☰';
+      menuToggle.classList.toggle('open', isOpen);
     });
 
     // ── Nav click handler — locks observer, applies theme immediately ──
@@ -1482,7 +1509,7 @@
       link.addEventListener('click', (e) => {
         e.preventDefault();
         navLinks.classList.remove('open');
-        menuToggle.innerHTML = '☰';
+        menuToggle.classList.remove('open');
 
         const targetId = link.getAttribute('href').substring(1);
         const targetSection = document.getElementById(targetId);
@@ -1515,31 +1542,49 @@
     };
 
     // ── Section theme detection — works bidirectionally (up + down) ──
-    let currentSectionId = 'inicio';
+    let currentSectionId = null;
 
     function updateActiveSection() {
       if (isScrollingFromMenu) return;
 
-      const scrollY = window.scrollY;
-      const triggerPoint = scrollY + 120; // just below header
+      const viewportHeight = window.innerHeight;
+      const triggerEdge = viewportHeight * 0.4; // 40% from top
+      
+      let activeSection = sections[0];
+      
+      // Check sections
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        // If the top of the section has crossed the 40% line, it becomes potential active
+        if (rect.top <= triggerEdge) {
+          activeSection = section;
+        }
+      });
 
-      let activeSection = sections[0]; // fallback to first
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        if (sections[i].offsetTop <= triggerPoint) {
-          activeSection = sections[i];
-          break;
+      // Special check for footer (end of page)
+      const footer = document.getElementById('siteFooter');
+      if (footer) {
+        const footerRect = footer.getBoundingClientRect();
+        if (footerRect.top <= (viewportHeight - 100)) { // If footer is visible at bottom
+          applyTheme(footer.dataset.theme);
+          return; // Skip section theme if footer is active
         }
       }
 
       const id = activeSection.id;
       if (id !== currentSectionId) {
         currentSectionId = id;
-        const theme = activeSection.dataset.theme;
-        body.classList.remove('theme-light', 'theme-dark', 'theme-green');
-        body.classList.add(`theme-${theme}`);
+        applyTheme(activeSection.dataset.theme);
         setActiveNav(id);
       }
+    }
+
+    function applyTheme(theme) {
+      if (!theme) return;
+      if (body.classList.contains(`theme-${theme}`)) return;
+      
+      body.classList.remove('theme-light', 'theme-dark', 'theme-green');
+      body.classList.add(`theme-${theme}`);
     }
 
     // Run on scroll via requestAnimationFrame (merged with parallax below)
