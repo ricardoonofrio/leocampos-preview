@@ -1205,7 +1205,7 @@
 
     
     
-    <section class="section" id="consultoria" data-theme="dark">
+    <section class="section" id="consultoria" data-theme="light">
       <div class="container section-inner theme-surface content-width">
         <div class="section-header reveal">
           <span class="eyebrow" style="margin-bottom: 16px;">Consultoria</span>
@@ -1274,7 +1274,7 @@
     </section>
 
     
-<section class="section" id="educacao" data-theme="light">
+<section class="section" id="educacao" data-theme="dark">
       <div class="container section-inner theme-surface content-width">
         <div class="section-header reveal">
           <span class="eyebrow">Educação e Informação</span>
@@ -1319,7 +1319,7 @@
     </section>
 
     
-    <section class="section" id="diferenciais" data-theme="green" style="min-height: calc(100vh - 84px); scroll-margin-top: 84px;">
+    <section class="section" id="diferenciais" data-theme="light" style="min-height: calc(100vh - 84px); scroll-margin-top: 84px;">
       <div class="container section-inner theme-surface content-width">
         <div class="grid-2" style="align-items: start;">
           <div class="reveal">
@@ -1359,7 +1359,7 @@
     </section>
 
 
-<section class="section" id="faq" data-theme="dark" style="min-height: calc(100vh - 84px); scroll-margin-top: 84px;">
+<section class="section" id="faq" data-theme="green" style="min-height: calc(100vh - 84px); scroll-margin-top: 84px;">
       <div class="container section-inner theme-surface content-width">
         <div class="section-header reveal">
           <span class="eyebrow">Perguntas frequentes</span>
@@ -1480,6 +1480,7 @@
     // ── Nav click handler — locks observer, applies theme immediately ──
     navItems.forEach(link => {
       link.addEventListener('click', (e) => {
+        e.preventDefault();
         navLinks.classList.remove('open');
         menuToggle.innerHTML = '☰';
 
@@ -1487,18 +1488,23 @@
         const targetSection = document.getElementById(targetId);
         if (!targetSection) return;
 
-        // Apply theme + active state instantly (don't wait for observer)
+        // 1. Lock observer immediately
         isScrollingFromMenu = true;
+        clearTimeout(scrollTimer);
+
+        // 2. Apply theme + active state instantly
         const theme = targetSection.dataset.theme;
         body.classList.remove('theme-light', 'theme-dark', 'theme-green');
         body.classList.add(`theme-${theme}`);
         setActiveNav(targetId);
 
-        // Re-enable observer after scroll settles
-        clearTimeout(scrollTimer);
+        // 3. Scroll manually
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+
+        // 4. Re-enable observer after scroll fully settles
         scrollTimer = setTimeout(() => {
           isScrollingFromMenu = false;
-        }, 1200);
+        }, 2000);
       });
     });
 
