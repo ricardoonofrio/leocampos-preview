@@ -259,7 +259,7 @@
     }
 
     h1 {
-      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
       max-width: 840px;
     }
 
@@ -277,9 +277,11 @@
     }
 
     p {
-      font-size: 1.04rem;
+      font-size: 1.1rem;
       max-width: 700px;
       opacity: 0.88;
+      line-height: 1.5;
+      text-wrap: pretty;
     }
 
     .eyebrow {
@@ -906,7 +908,7 @@
 
     @media (max-width: 640px) {
       .container {
-        width: min(100% - 28px, var(--container));
+        width: min(100% - 40px, var(--container)); /* Margem de 20px de cada lado para respiro */
       }
 
       .nav {
@@ -914,24 +916,27 @@
       }
 
       .section {
-        padding: 96px 0 70px;
+        padding: 72px 0 64px; /* Padding mais enxuto para caber melhor na tela inteira */
       }
 
       .section-hero {
-        padding: 106px 0 70px;
+        padding: 106px 0 64px;
       }
 
       h1 {
-        font-size: clamp(2.4rem, 12vw, 4rem);
+        font-size: clamp(2.4rem, 11vw, 3.5rem);
       }
 
       h2 {
-        margin-bottom: 18px;
+        font-size: clamp(2rem, 8vw, 2.6rem); /* Permite que o título ocupe elegantemente o espaço */
+        margin-bottom: 20px;
+        line-height: 1.15;
       }
 
       .hero-copy p,
       p {
-        font-size: 1rem;
+        font-size: 1.05rem;
+        line-height: 1.55;
       }
 
       .btn-row {
