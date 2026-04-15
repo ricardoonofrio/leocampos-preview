@@ -1468,15 +1468,37 @@
     const navLinks = document.getElementById('navLinks');
     const navItems = document.querySelectorAll('.nav-links a');
 
+    // ── Flag: true while a menu-click scroll is in progress ──
+    let isScrollingFromMenu = false;
+    let scrollTimer = null;
+
     menuToggle.addEventListener('click', () => {
       const isOpen = navLinks.classList.toggle('open');
       menuToggle.innerHTML = isOpen ? '✕' : '☰';
     });
 
+    // ── Nav click handler — locks observer, applies theme immediately ──
     navItems.forEach(link => {
-      link.addEventListener('click', () => {
+      link.addEventListener('click', (e) => {
         navLinks.classList.remove('open');
         menuToggle.innerHTML = '☰';
+
+        const targetId = link.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        if (!targetSection) return;
+
+        // Apply theme + active state instantly (don't wait for observer)
+        isScrollingFromMenu = true;
+        const theme = targetSection.dataset.theme;
+        body.classList.remove('theme-light', 'theme-dark', 'theme-green');
+        body.classList.add(`theme-${theme}`);
+        setActiveNav(targetId);
+
+        // Re-enable observer after scroll settles
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+          isScrollingFromMenu = false;
+        }, 1200);
       });
     });
 
@@ -1486,7 +1508,9 @@
       });
     };
 
+    // ── Section observer — only fires when NOT scrolling from menu ──
     const sectionObserver = new IntersectionObserver((entries) => {
+      if (isScrollingFromMenu) return;
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const theme = entry.target.dataset.theme;
