@@ -1514,25 +1514,36 @@
       });
     };
 
-    // ── Section observer — only fires when NOT scrolling from menu ──
-    const sectionObserver = new IntersectionObserver((entries) => {
-      if (isScrollingFromMenu) return;
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const theme = entry.target.dataset.theme;
-          const id = entry.target.id;
-          body.classList.remove('theme-light', 'theme-dark', 'theme-green');
-          body.classList.add(`theme-${theme}`);
-          setActiveNav(id);
-        }
-      });
-    }, {
-      rootMargin: "0px 0px -50% 0px",
-      threshold: 0
-    });
+    // ── Section theme detection — works bidirectionally (up + down) ──
+    let currentSectionId = 'inicio';
 
-    sections.forEach(section => sectionObserver.observe(section));
-    setActiveNav('inicio');
+    function updateActiveSection() {
+      if (isScrollingFromMenu) return;
+
+      const scrollY = window.scrollY;
+      const triggerPoint = scrollY + 120; // just below header
+
+      let activeSection = sections[0]; // fallback to first
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        if (sections[i].offsetTop <= triggerPoint) {
+          activeSection = sections[i];
+          break;
+        }
+      }
+
+      const id = activeSection.id;
+      if (id !== currentSectionId) {
+        currentSectionId = id;
+        const theme = activeSection.dataset.theme;
+        body.classList.remove('theme-light', 'theme-dark', 'theme-green');
+        body.classList.add(`theme-${theme}`);
+        setActiveNav(id);
+      }
+    }
+
+    // Run on scroll via requestAnimationFrame (merged with parallax below)
+    updateActiveSection();
 
     const revealAll = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-group');
     const revealObserver = new IntersectionObserver((entries) => {
@@ -1560,6 +1571,9 @@
       if (!ticking) {
         requestAnimationFrame(() => {
           const scrollY = window.scrollY;
+
+          // Update active section theme
+          updateActiveSection();
 
           // Parallax on each section's background layer
           document.querySelectorAll('.section').forEach(section => {
