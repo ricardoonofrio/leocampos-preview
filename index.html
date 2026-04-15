@@ -86,7 +86,10 @@
       right: 0;
       z-index: 1000;
       background: transparent;
-      transition: all 1.0s cubic-bezier(0.45, 0, 0.55, 1);
+      transition: background-color 1.0s cubic-bezier(0.45, 0, 0.55, 1), 
+                  backdrop-filter 1.0s cubic-bezier(0.45, 0, 0.55, 1),
+                  box-shadow 1.0s cubic-bezier(0.45, 0, 0.55, 1),
+                  color 1.0s ease;
       border-bottom: 1px solid transparent;
     }
 
@@ -898,11 +901,15 @@
         align-items: center;
         padding: 40px;
         gap: 28px;
-        transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1), background-color 1.0s cubic-bezier(0.45, 0, 0.55, 1);
         z-index: 1500;
         box-shadow: -10px 0 40px rgba(0,0,0,0.4);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
+      }
+
+      .nav-links a {
+        color: var(--text-light) !important; /* Força cor clara pois o fundo do menu é sempre escuro */
       }
 
       /* Mobile menu theme syncing */
@@ -922,7 +929,8 @@
       .site-header.scrolled {
         backdrop-filter: blur(18px) saturate(180%) !important;
         -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
-        transition: background-color 1.0s cubic-bezier(0.45, 0, 0.55, 1);
+        transition: background-color 1.0s cubic-bezier(0.45, 0, 0.55, 1), color 1.0s ease;
+        color: var(--text-light) !important; /* Força cor clara no mobile quando scrollado para contraste com o vidro escuro */
       }
 
       .theme-light .site-header.scrolled { background: rgba(35, 39, 46, 0.8) !important; }
