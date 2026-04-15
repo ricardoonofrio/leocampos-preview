@@ -872,8 +872,17 @@
         gap: 40px;
       }
 
-      /* Premium section immersion on mobile */
-      .section#inicio,
+      .section {
+        padding: 72px 0;
+      }
+
+      .section#inicio {
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        padding: 104px 0 72px;
+      }
+
       .section#para-quem,
       .section#sobre,
       .section#consultoria,
@@ -881,10 +890,13 @@
       .section#diferenciais,
       .section#faq,
       .section#contato {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        padding: 96px 0;
+        min-height: auto;
+        display: block;
+        padding: 72px 0;
+      }
+
+      .section-header {
+        margin-bottom: 24px;
       }
 
       .nav-links {
@@ -956,45 +968,106 @@
       }
 
       .section {
-        padding: 72px 0 64px; /* Padding mais enxuto para caber melhor na tela inteira */
+        padding: 64px 0;
       }
 
       .section-hero {
-        padding: 106px 0 64px;
+        padding: 104px 0 64px;
+      }
+
+      .hero-grid {
+        gap: 28px;
       }
 
       h1 {
-        font-size: clamp(2.4rem, 11vw, 3.5rem);
+        font-size: clamp(2rem, 8.8vw, 2.7rem);
+        line-height: 1.08;
+        letter-spacing: -0.04em;
       }
 
       h2 {
-        font-size: clamp(2rem, 8vw, 2.6rem); /* Permite que o título ocupe elegantemente o espaço */
-        margin-bottom: 20px;
-        line-height: 1.15;
+        font-size: clamp(1.65rem, 7vw, 2.2rem);
+        margin-bottom: 16px;
+        line-height: 1.12;
+      }
+
+      h3 {
+        font-size: 1.12rem;
+        line-height: 1.28;
+        margin-bottom: 10px;
+      }
+
+      .eyebrow {
+        margin-bottom: 14px;
+        font-size: 0.72rem;
+        letter-spacing: 0.16em;
       }
 
       .hero-copy p,
       p {
-        font-size: 1.05rem;
-        line-height: 1.55;
+        font-size: 0.98rem;
+        line-height: 1.58;
+      }
+
+      .hero-copy p {
+        margin-top: 16px;
+      }
+
+      .section-header p {
+        max-width: 36ch;
       }
 
       .btn-row {
-        gap: 12px;
-        margin-top: 34px;
+        gap: 10px;
+        margin-top: 24px;
       }
 
       .btn {
         width: 100%;
+        min-height: 52px;
+        padding: 0 20px;
+        font-size: 0.94rem;
+        border-radius: 12px;
       }
 
       .visual-box {
         width: 100%;
-        max-width: 350px;
+        max-width: 280px;
+        border-radius: 24px;
+      }
+
+      .boxed-card {
+        padding: 24px 20px !important;
+        border-radius: 20px;
+        gap: 12px;
+      }
+
+      .micro-card {
+        padding: 20px;
+        border-radius: 18px;
+      }
+
+      #sobre .reveal > div[style*="padding: 40px"] {
+        padding: 24px !important;
+        border-radius: 20px !important;
+        gap: 18px !important;
+      }
+
+      .boxed-cards,
+      .faq,
+      .contact-links {
+        margin-top: 24px !important;
       }
 
       .faq-btn {
-        padding: 20px 0;
+        padding: 16px 0;
+        font-size: 0.98rem;
+        line-height: 1.4;
+      }
+
+      .faq-answer p {
+        padding: 0 0 16px;
+        font-size: 0.95rem;
       }
     }
   
@@ -1104,6 +1177,76 @@
     
     .micro-card:hover::before {
       opacity: 1;
+    }
+
+  
+    /* Mobile refinement v2 — better text fill inside cards */
+    @media (max-width: 640px) {
+      .boxed-cards {
+        gap: 16px !important;
+        margin-top: 20px !important;
+      }
+
+      .boxed-card {
+        padding: 20px 18px !important;
+        gap: 10px !important;
+      }
+
+      .boxed-card h3 {
+        font-size: 1.22rem !important;
+        line-height: 1.24 !important;
+        margin-bottom: 6px !important;
+        max-width: 100% !important;
+      }
+
+      .boxed-card p {
+        font-size: 0.98rem !important;
+        line-height: 1.55 !important;
+        max-width: 100% !important;
+      }
+
+      .micro-card {
+        padding: 18px !important;
+      }
+
+      .micro-card h3 {
+        font-size: 1.12rem !important;
+        line-height: 1.22 !important;
+      }
+
+      .micro-card p {
+        font-size: 0.94rem !important;
+        line-height: 1.45 !important;
+        max-width: 100% !important;
+      }
+
+      #sobre .section-header {
+        margin-bottom: 20px !important;
+      }
+
+      #sobre .reveal > div[style*="padding: 40px"] p,
+      #consultoria .boxed-card p,
+      #educacao .boxed-card p,
+      #para-quem .boxed-card p {
+        max-width: 100% !important;
+      }
+
+      #consultoria .boxed-card,
+      #educacao .boxed-card,
+      #para-quem .boxed-card {
+        border-radius: 20px !important;
+      }
+
+      #consultoria .boxed-card [style*="padding-top: 16px"],
+      #consultoria .boxed-card [style*="padding-top: 20px"],
+      #educacao .boxed-card p[style*="padding-top: 20px"] {
+        padding-top: 14px !important;
+      }
+
+      #consultoria .boxed-card [style*="margin-bottom: 24px"],
+      #educacao .boxed-card p[style*="margin-bottom: 16px"] {
+        margin-bottom: 14px !important;
+      }
     }
 
   </style>
