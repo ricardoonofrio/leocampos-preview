@@ -198,7 +198,7 @@
       padding: 80px 0;
       display: flex;
       align-items: center;
-      scroll-margin-top: 84px;
+      scroll-margin-top: 32px;
     }
 
     .section:not(.section-hero)::after {
@@ -1359,7 +1359,7 @@
     </section>
 
 
-<section class="section" id="faq" data-theme="dark">
+<section class="section" id="faq" data-theme="dark" style="min-height: calc(100vh - 84px); scroll-margin-top: 84px;">
       <div class="container section-inner theme-surface content-width">
         <div class="section-header reveal">
           <span class="eyebrow">Perguntas frequentes</span>
@@ -1411,7 +1411,7 @@
     </section>
 
     
-<section class="section" id="contato" data-theme="green">
+<section class="section" id="contato" data-theme="green" style="min-height: calc(100vh - 84px); scroll-margin-top: 84px;">
       <div class="container section-inner theme-surface content-width">
         <div class="cta-wrap reveal">
           <div class="section-header" style="margin-bottom:0;">
@@ -1497,7 +1497,8 @@
         }
       });
     }, {
-      threshold: 0.45
+      rootMargin: "0px 0px -50% 0px",
+      threshold: 0
     });
 
     sections.forEach(section => sectionObserver.observe(section));
