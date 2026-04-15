@@ -199,6 +199,19 @@
       display: flex;
       align-items: center;
       scroll-margin-top: 32px;
+      transition: background-color 0.8s ease;
+    }
+
+    .section[data-theme="dark"] {
+      background-color: var(--bg-dark);
+    }
+
+    .section[data-theme="green"] {
+      background-color: var(--bg-green);
+    }
+
+    .section[data-theme="light"] {
+      background-color: var(--bg-light);
     }
 
     .section:not(.section-hero)::after {
