@@ -1212,6 +1212,31 @@
         max-width: 100% !important;
       }
 
+      .credenciais-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+      }
+
+      .credenciais-grid .micro-card {
+        padding: 16px 12px !important;
+      }
+
+      .credenciais-grid .micro-card span {
+        font-size: 0.68rem !important;
+        margin-bottom: 12px !important;
+      }
+
+      .credenciais-grid .micro-card h3 {
+        font-size: 1.05rem !important;
+        line-height: 1.2 !important;
+        word-break: break-word;
+      }
+
+      .credenciais-grid .micro-card p {
+        font-size: 0.85rem !important;
+        line-height: 1.35 !important;
+      }
+
       .micro-card {
         padding: 18px !important;
       }
@@ -1366,7 +1391,7 @@
               <h2 style="font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 0; max-width: none; text-wrap: auto;">Base técnica sólida a serviço de decisões mais <span class="gold">conscientes</span>.</h2>
             </div>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 32px;">
+            <div class="credenciais-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 32px;">
               <div class="micro-card">
                 <span class="gold" style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;">Experiência</span>
                 <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 8px;">+14 anos</h3>
